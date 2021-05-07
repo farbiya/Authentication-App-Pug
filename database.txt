@@ -1,0 +1,42 @@
+Table structure for table `schedule`
+--
+
+CREATE TABLE `schedule` (
+  `schedule_id` int(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(20) NOT NULL,
+  `day` tinyint(4) NOT NULL,
+  `start_time` time(2) NOT NULL,
+  `end_time` time(2) NOT NULL
+) 
+
+
+ Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(20) NOT NULL AUTO_INCREMENT,
+  `surname` varchar(50) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL
+) 
+
+-- Indexes for table `schedule`
+--
+ALTER TABLE `schedule`
+  ADD PRIMARY KEY (`schedule_id`),
+  ADD KEY `Foreignkey` (`user_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+
+-- Constraints for table `schedule`
+--
+ALTER TABLE `schedule`
+  ADD CONSTRAINT `Foreignkey` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+COMMIT;
