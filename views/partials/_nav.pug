@@ -1,0 +1,20 @@
+nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
+      button.navbar-toggler.hidden-md-up.pull-xs-right(type='button', data-toggle='collapse', data-target='#navbar') &#x2630;
+      #navbar.navbar-nav.collapse.navbar-toggleable-sm
+        .container
+          a.navbar-brand(href='/')
+            i.icn-logo.material-icons event_note
+            | Schedule Website
+          .nav-items.clearfix
+            if ! locals.currentUser
+              a.btn.btn-info.pull-md-right(href='../signup') Sign Up
+           
+           
+
+          if locals.currentUser
+            div 
+              a.nav-item.nav-link(href='../home') Home
+              a.nav-item.nav-link(href='../schedule') Schedule Management
+              a.btn.btn-info.pull-md-right(href='/logout') Log Out
+          //- else
+          //-   a.btn.btn-info.pull-md-right(href='login') Log In

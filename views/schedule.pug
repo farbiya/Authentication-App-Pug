@@ -1,0 +1,43 @@
+extends layouts/main
+
+block content
+    include partials/_nav
+    
+        
+    .main.container.text-xs-center
+        if(error)
+            small.alert.alert-danger=error
+        if(success)
+            small.alert.alert-success=success
+        .row
+            .col-1 
+                h1.display-5 Your Existing Schedules
+                .form
+                    table#displayTable
+                        tr 
+                            th Day 
+                            th Start At 
+                            th End At
+                            th Action
+                        each schedule in schedules    
+                            tr
+                                td #{days[schedule.day]}
+                                td #{schedule.start_time.slice(0, 5)}
+                                td #{schedule.end_time.slice(0, 5)}
+                                td
+                                    a.btn.btn-danger.delete(onclick="return confirm('Do you want to Delete schedule?') " href='../delete/'+schedule.schedule_id ) Delete                 
+            .col-1  
+                h1.display-5 Add New Schedule   
+                .form 
+                    form(action='../schedule',method="POST")
+                                            
+                        label(for='day') Day
+                        select#day(name='day') Day
+                            each day, index in days
+                                option(value=index) #{day}
+                        label(for="start_time") Start Time
+                        input#start_time(type="time", name="start_time")
+                        label(for="end_time") End Time
+                        input#end_time(type="time", name="end_time", value="schedule.end_time.slice(0, 5)")
+                        button(type="submit") Add 
+        
